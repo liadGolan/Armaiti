@@ -152,7 +152,7 @@ class FractalPart:
         self.ultra_stream.repeatInsert(self.b_measure, self.b_measures)
 
         return self.ultra_stream
-    
+
 
 def main():
     first = FractalPart('C', 4)

@@ -31,3 +31,8 @@ def part_corrector(part1, part2, first, second):
         return part1, part2
     else:
         return part1, part2
+
+# def part_corrector_two(staffs, generators):
+#     max = 0
+#     for genrators as generator:
+#
