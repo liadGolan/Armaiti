@@ -80,9 +80,9 @@ class Harmony:
 
 
 def main():
-    harmony = Harmony('one', 4)
+    harmony = Harmony('one', 3)
     harmony_stream = harmony.get_final_build()
-    harmony_stream.insert(0, music21.tempo.MetronomeMark(number=200))
+    harmony_stream.insert(0, music21.tempo.MetronomeMark(number=150))
     harmony_stream.show()
 
 
