@@ -1,0 +1,245 @@
+#!/usr/bin/python3
+
+
+from music21 import *
+from helpers.part_corrector import part_corrector
+
+
+class Harmony:
+    def __init__(self, start, steps):
+        self.one_chord = chord.Chord(['C2', 'C3', 'E3', 'G3'], quarterLength=2)
+        self.two_chord = chord.Chord(['D2', 'D3', 'F3', 'A3'], quarterLength=2)
+        self.three_chord = chord.Chord(['E2', 'E3', 'G3', 'B3'], quarterLength=2)
+        self.four_chord = chord.Chord(['F2', 'F3', 'A3', 'C4'], quarterLength=2)
+        self.five_chord = chord.Chord(['G2', 'G3', 'B3', 'D4'], quarterLength=2)
+        self.six_chord = chord.Chord(['A2', 'A3', 'C4', 'E4'], quarterLength=2)
+        self.seven_chord = chord.Chord(['B2', 'B3', 'D4', 'F#4'], quarterLength=2)
+
+        self.one_chords = []
+        self.two_chords = []
+        self.three_chords = []
+        self.four_chords = []
+        self.five_chords = []
+        self.six_chords = []
+        self.seven_chords = []
+        self.pos = 0
+
+        self.master_array = [start]
+
+        self.rules = {
+            'one': ('one', 'four', 'one', 'five'),
+            'two': ('six', 'two', 'five', 'one'),
+            'three': ('one', 'six', 'four', 'five'),
+            'four': ('seven', 'four', 'two', 'five'),
+            'five': ('six', 'four', 'five', 'one'),
+            'six': ('one', 'three', 'four', 'five'),
+            'seven': ('one', 'six', 'two', 'five'),
+        }
+
+        while steps > 0:
+            self.master_array = self.fractal_step(self.master_array)
+            steps -= 1
+
+    def fractal_step(self, array):
+        master_array = []
+        for e in array:
+            to_be_added = self.rules[e]
+            for i in to_be_added:
+                master_array.append(i)
+        return master_array
+
+    def get_final_build(self):
+        for e in self.master_array:
+            if e is 'one':
+                self.one_chords.append(self.pos)
+            elif e is 'two':
+                self.two_chords.append(self.pos)
+            elif e is 'three':
+                self.three_chords.append(self.pos)
+            elif e is 'four':
+                self.four_chords.append(self.pos)
+            elif e is 'five':
+                self.five_chords.append(self.pos)
+            elif e is 'six':
+                self.six_chords.append(self.pos)
+            elif e is 'seven':
+                self.seven_chords.append(self.pos)
+            else:
+                print('ERROR')
+
+            self.pos += 2
+
+        stram = stream.Stream()
+        stram.repeatInsert(self.one_chord, self.one_chords)
+        stram.repeatInsert(self.two_chord, self.two_chords)
+        stram.repeatInsert(self.three_chord, self.three_chords)
+        stram.repeatInsert(self.four_chord, self.four_chords)
+        stram.repeatInsert(self.five_chord, self.five_chords)
+        stram.repeatInsert(self.six_chord, self.six_chords)
+        stram.repeatInsert(self.seven_chord, self.seven_chords)
+        return stram
+
+class FractalPart:
+    def __init__(self, start, steps):
+        self.c_measure = self.create_c_measure()
+        self.d_measure = self.create_d_measure()
+        self.e_measure = self.create_e_measure()
+        self.f_measure = self.create_f_measure()
+        self.g_measure = self.create_g_measure()
+        self.a_measure = self.create_a_measure()
+        self.b_measure = self.create_b_measure()
+
+        self.c_measures = []
+        self.d_measures = []
+        self.e_measures = []
+        self.f_measures = []
+        self.g_measures = []
+        self.a_measures = []
+        self.b_measures = []
+        self.pos = 0
+
+        self.rules = {
+            'C': self.c_measure,
+            'D': self.d_measure,
+            'E': self.e_measure,
+            'F': self.f_measure,
+            'G': self.g_measure,
+            'A': self.a_measure,
+            'B': self.b_measure
+        }
+
+        self.rulesBeforeFinal = {
+            'C': ('G', 'F', 'E', 'D'),
+            'D': ('G', 'A', 'B', 'C'),
+            'E': ('F', 'C', 'B', 'A', 'G'),
+            'F': ('D', 'G', 'A', 'B', 'C'),
+            'G': ('C', 'D', 'E', 'F', 'C'),
+            'A': ('E', 'A'),
+            'B': ('G', 'C'),
+        }
+
+        self.master_array = [start]
+
+        while steps > 1:
+            self.master_array = self.fractal_step(self.master_array)
+            steps -= 1
+
+        self.ultra_stream = stream.Part()
+
+    @staticmethod
+    def create_c_measure():
+        measure = stream.Measure()
+        measure.append(note.Note('G5', quarterLength=1))
+        measure.append(note.Note('F5', quarterLength=1))
+        measure.append(note.Note('E-5', quarterLength=1))
+        measure.append(note.Note('D5', quarterLength=1))
+        return measure
+
+    @staticmethod
+    def create_d_measure():
+        measure = stream.Measure()
+        measure.append(note.Note('G5', quarterLength=1))
+        measure.append(note.Note('A5', quarterLength=1))
+        measure.append(note.Note('B-5', quarterLength=1))
+        measure.append(note.Note('C6', quarterLength=1))
+        return measure
+
+    @staticmethod
+    def create_e_measure():
+        measure = stream.Measure()
+        measure.append(note.Note('F5', quarterLength=2))
+        measure.append(note.Note('C6', quarterLength=.5))
+        measure.append(note.Note('B-5', quarterLength=.5))
+        measure.append(note.Note('A5', quarterLength=.5))
+        measure.append(note.Note('G5', quarterLength=.5))
+        return measure
+
+    @staticmethod
+    def create_f_measure():
+        measure = stream.Measure()
+        measure.append(note.Note('D6', quarterLength=2))
+        measure.append(note.Note('G5', quarterLength=.5))
+        measure.append(note.Note('A5', quarterLength=.5))
+        measure.append(note.Note('B-5', quarterLength=.5))
+        measure.append(note.Note('C6', quarterLength=.5))
+        return measure
+
+    @staticmethod
+    def create_g_measure():
+        measure = stream.Measure()
+        measure.append(note.Note('C5', quarterLength=.5))
+        measure.append(note.Note('D5', quarterLength=.5))
+        measure.append(note.Note('E-5', quarterLength=.5))
+        measure.append(note.Note('F5', quarterLength=.5))
+        measure.append(note.Note('C6', quarterLength=2))
+        return measure
+
+    @staticmethod
+    def create_a_measure():
+        measure = stream.Measure()
+        measure.append(note.Note('E-5', quarterLength=2))
+        measure.append(note.Note('A5', quarterLength=2))
+        return measure
+
+    @staticmethod
+    def create_b_measure():
+        measure = stream.Measure()
+        measure.append(note.Note('G5', quarterLength=2))
+        measure.append(note.Note('C5', quarterLength=2))
+        return measure
+
+    def fractal_step(self, old_array):
+        master_array = []
+        for n in old_array:
+            to_be_added = self.rulesBeforeFinal[n]
+            for e in to_be_added:
+                master_array.append(e)
+        return master_array
+
+    def get_final_build(self):
+        for e in self.master_array:
+            if e is 'C':
+                self.c_measures.append(self.pos)
+            elif e is 'D':
+                self.d_measures.append(self.pos)
+            elif e is 'E':
+                self.e_measures.append(self.pos)
+            elif e is 'F':
+                self.f_measures.append(self.pos)
+            elif e is 'G':
+                self.g_measures.append(self.pos)
+            elif e is 'A':
+                self.a_measures.append(self.pos)
+            elif e is 'B':
+                self.b_measures.append(self.pos)
+            else:
+                print(e + 'ERROR')
+
+            self.pos += 4
+
+        self.ultra_stream.repeatInsert(self.c_measure, self.c_measures)
+        self.ultra_stream.repeatInsert(self.d_measure, self.d_measures)
+        self.ultra_stream.repeatInsert(self.e_measure, self.e_measures)
+        self.ultra_stream.repeatInsert(self.f_measure, self.f_measures)
+        self.ultra_stream.repeatInsert(self.g_measure, self.g_measures)
+        self.ultra_stream.repeatInsert(self.a_measure, self.a_measures)
+        self.ultra_stream.repeatInsert(self.b_measure, self.b_measures)
+
+        return self.ultra_stream
+
+def main():
+    first = FractalPart('C', 4)
+    part1 = first.get_final_build()
+    part1.id = 'part1'
+    second = Harmony('one', 4)
+    part2 = second.get_final_build()
+    part2.id = 'part2'
+    part1, part2 = part_corrector(part1, part2, first, second)
+    score = stream.Score()
+    score.insert(0, part1)
+    score.insert(0, part2)
+    score.show()
+
+
+if __name__ == '__main__':
+    main()
