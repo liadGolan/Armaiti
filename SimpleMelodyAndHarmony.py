@@ -3,17 +3,18 @@
 
 from music21 import *
 from helpers.part_corrector import part_corrector
+from helpers.chord_sheet import *
 
 
 class Harmony:
     def __init__(self, start, steps):
-        self.one_chord = chord.Chord(['C2', 'C3', 'E3', 'G3'], quarterLength=2)
-        self.two_chord = chord.Chord(['D2', 'D3', 'F3', 'A3'], quarterLength=2)
-        self.three_chord = chord.Chord(['E2', 'E3', 'G3', 'B3'], quarterLength=2)
-        self.four_chord = chord.Chord(['F2', 'F3', 'A3', 'C4'], quarterLength=2)
-        self.five_chord = chord.Chord(['G2', 'G3', 'B3', 'D4'], quarterLength=2)
-        self.six_chord = chord.Chord(['A2', 'A3', 'C4', 'E4'], quarterLength=2)
-        self.seven_chord = chord.Chord(['B2', 'B3', 'D4', 'F#4'], quarterLength=2)
+        self.one_chord = chord.Chord(chord_sheet['one'], quarterLength=2)
+        self.two_chord = chord.Chord(chord_sheet['two'], quarterLength=2)
+        self.three_chord = chord.Chord(chord_sheet['three'], quarterLength=2)
+        self.four_chord = chord.Chord(chord_sheet['four'], quarterLength=2)
+        self.five_chord = chord.Chord(chord_sheet['five'], quarterLength=2)
+        self.six_chord = chord.Chord(chord_sheet['six'], quarterLength=2)
+        self.seven_chord = chord.Chord(chord_sheet['seven'], quarterLength=2)
 
         self.one_chords = []
         self.two_chords = []
@@ -26,15 +27,7 @@ class Harmony:
 
         self.master_array = [start]
 
-        self.rules = {
-            'one': ('one', 'four', 'one', 'five'),
-            'two': ('six', 'two', 'five', 'one'),
-            'three': ('one', 'six', 'four', 'five'),
-            'four': ('seven', 'four', 'two', 'five'),
-            'five': ('six', 'four', 'five', 'one'),
-            'six': ('one', 'three', 'four', 'five'),
-            'seven': ('one', 'six', 'two', 'five'),
-        }
+        self.rules = chord_rules
 
         while steps > 0:
             self.master_array = self.fractal_step(self.master_array)
