@@ -74,31 +74,31 @@ class Harmony:
 
 class FractalPart:
     def __init__(self, start, steps):
-        self.c_measure = self.create_c_measure()
-        self.d_measure = self.create_d_measure()
-        self.e_measure = self.create_e_measure()
-        self.f_measure = self.create_f_measure()
-        self.g_measure = self.create_g_measure()
-        self.a_measure = self.create_a_measure()
-        self.b_measure = self.create_b_measure()
+        self.n1_measure = self.create_n1_measure()
+        self.n2_measure = self.create_n2_measure()
+        self.n3_measure = self.create_n3_measure()
+        self.n4_measure = self.create_n4_measure()
+        self.n5_measure = self.create_n5_measure()
+        self.n6_measure = self.create_n6_measure()
+        self.n7_measure = self.create_n7_measure()
 
-        self.c_measures = []
-        self.d_measures = []
-        self.e_measures = []
-        self.f_measures = []
-        self.g_measures = []
-        self.a_measures = []
-        self.b_measures = []
+        self.n1_measures = []
+        self.n2_measures = []
+        self.n3_measures = []
+        self.n4_measures = []
+        self.n5_measures = []
+        self.n6_measures = []
+        self.n7_measures = []
         self.pos = 0
 
         self.rules = {
-            'C': self.c_measure,
-            'D': self.d_measure,
-            'E': self.e_measure,
-            'F': self.f_measure,
-            'G': self.g_measure,
-            'A': self.a_measure,
-            'B': self.b_measure
+            'C': self.n1_measure,
+            'D': self.n2_measure,
+            'E': self.n3_measure,
+            'F': self.n4_measure,
+            'G': self.n5_measure,
+            'A': self.n6_measure,
+            'B': self.n7_measure
         }
 
         self.rulesBeforeFinal = {
@@ -120,7 +120,7 @@ class FractalPart:
         self.ultra_stream = stream.Part()
 
     @staticmethod
-    def create_c_measure():
+    def create_n1_measure():
         measure = stream.Measure()
         measure.append(note.Note('G5', quarterLength=1))
         measure.append(note.Note('F5', quarterLength=1))
@@ -129,7 +129,7 @@ class FractalPart:
         return measure
 
     @staticmethod
-    def create_d_measure():
+    def create_n2_measure():
         measure = stream.Measure()
         measure.append(note.Note('G5', quarterLength=1))
         measure.append(note.Note('A5', quarterLength=1))
@@ -138,7 +138,7 @@ class FractalPart:
         return measure
 
     @staticmethod
-    def create_e_measure():
+    def create_n3_measure():
         measure = stream.Measure()
         measure.append(note.Note('F5', quarterLength=2))
         measure.append(note.Note('C6', quarterLength=.5))
@@ -148,7 +148,7 @@ class FractalPart:
         return measure
 
     @staticmethod
-    def create_f_measure():
+    def create_n4_measure():
         measure = stream.Measure()
         measure.append(note.Note('D6', quarterLength=2))
         measure.append(note.Note('G5', quarterLength=.5))
@@ -158,7 +158,7 @@ class FractalPart:
         return measure
 
     @staticmethod
-    def create_g_measure():
+    def create_n5_measure():
         measure = stream.Measure()
         measure.append(note.Note('C5', quarterLength=.5))
         measure.append(note.Note('D5', quarterLength=.5))
@@ -168,14 +168,14 @@ class FractalPart:
         return measure
 
     @staticmethod
-    def create_a_measure():
+    def create_n6_measure():
         measure = stream.Measure()
         measure.append(note.Note('E-5', quarterLength=2))
         measure.append(note.Note('A5', quarterLength=2))
         return measure
 
     @staticmethod
-    def create_b_measure():
+    def create_n7_measure():
         measure = stream.Measure()
         measure.append(note.Note('G5', quarterLength=2))
         measure.append(note.Note('C5', quarterLength=2))
@@ -192,31 +192,31 @@ class FractalPart:
     def get_final_build(self):
         for e in self.master_array:
             if e is 'C':
-                self.c_measures.append(self.pos)
+                self.n1_measures.append(self.pos)
             elif e is 'D':
-                self.d_measures.append(self.pos)
+                self.n2_measures.append(self.pos)
             elif e is 'E':
-                self.e_measures.append(self.pos)
+                self.n3_measures.append(self.pos)
             elif e is 'F':
-                self.f_measures.append(self.pos)
+                self.n4_measures.append(self.pos)
             elif e is 'G':
-                self.g_measures.append(self.pos)
+                self.n5_measures.append(self.pos)
             elif e is 'A':
-                self.a_measures.append(self.pos)
+                self.n6_measures.append(self.pos)
             elif e is 'B':
-                self.b_measures.append(self.pos)
+                self.n7_measures.append(self.pos)
             else:
                 print(e + 'ERROR')
 
             self.pos += 4
 
-        self.ultra_stream.repeatInsert(self.c_measure, self.c_measures)
-        self.ultra_stream.repeatInsert(self.d_measure, self.d_measures)
-        self.ultra_stream.repeatInsert(self.e_measure, self.e_measures)
-        self.ultra_stream.repeatInsert(self.f_measure, self.f_measures)
-        self.ultra_stream.repeatInsert(self.g_measure, self.g_measures)
-        self.ultra_stream.repeatInsert(self.a_measure, self.a_measures)
-        self.ultra_stream.repeatInsert(self.b_measure, self.b_measures)
+        self.ultra_stream.repeatInsert(self.n1_measure, self.n1_measures)
+        self.ultra_stream.repeatInsert(self.n2_measure, self.n2_measures)
+        self.ultra_stream.repeatInsert(self.n3_measure, self.n3_measures)
+        self.ultra_stream.repeatInsert(self.n4_measure, self.n4_measures)
+        self.ultra_stream.repeatInsert(self.n5_measure, self.n5_measures)
+        self.ultra_stream.repeatInsert(self.n6_measure, self.n6_measures)
+        self.ultra_stream.repeatInsert(self.n7_measure, self.n7_measures)
 
         return self.ultra_stream
 
