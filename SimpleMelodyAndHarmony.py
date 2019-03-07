@@ -5,6 +5,7 @@ from music21 import *
 from helpers.part_corrector import part_corrector
 from helpers.chord_sheet import *
 from helpers.melody_sheet import *
+from helpers.MelodyAdjustor import *
 
 
 class Harmony:
@@ -186,11 +187,13 @@ def main():
     second = Harmony('one', 4)
     part2 = second.get_final_build()
     part2.id = 'part2'
-    part1, part2 = part_corrector(part1, part2, first, second)
-    score = stream.Score()
-    score.insert(0, part1)
-    score.insert(0, part2)
-    score.show()
+    adjustedMelody = melody_adjustor(second,part1)
+    print(adjustedMelody);
+    # part1, part2 = part_corrector(part1, part2, first, second)
+    # score = stream.Score()
+    # score.insert(0, part1)
+    # score.insert(0, part2)
+    # score.show()
 
 
 if __name__ == '__main__':
