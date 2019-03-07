@@ -4,6 +4,7 @@
 from music21 import *
 from helpers.part_corrector import part_corrector
 from helpers.chord_sheet import *
+from helpers.melody_sheet import *
 
 
 class Harmony:
@@ -101,15 +102,7 @@ class FractalPart:
             'B': self.n7_measure
         }
 
-        self.rulesBeforeFinal = {
-            'C': ('G', 'F', 'E', 'D'),
-            'D': ('G', 'A', 'B', 'C'),
-            'E': ('F', 'C', 'B', 'A', 'G'),
-            'F': ('D', 'G', 'A', 'B', 'C'),
-            'G': ('C', 'D', 'E', 'F', 'C'),
-            'A': ('E', 'A'),
-            'B': ('G', 'C'),
-        }
+        self.rulesBeforeFinal = rules_before_final
 
         self.master_array = [start]
 
