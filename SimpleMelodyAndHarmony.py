@@ -114,65 +114,31 @@ class FractalPart:
 
     @staticmethod
     def create_n1_measure():
-        measure = stream.Measure()
-        measure.append(note.Note('G5', quarterLength=1))
-        measure.append(note.Note('F5', quarterLength=1))
-        measure.append(note.Note('E-5', quarterLength=1))
-        measure.append(note.Note('D5', quarterLength=1))
-        return measure
+        return n1measure
 
     @staticmethod
     def create_n2_measure():
-        measure = stream.Measure()
-        measure.append(note.Note('G5', quarterLength=1))
-        measure.append(note.Note('A5', quarterLength=1))
-        measure.append(note.Note('B-5', quarterLength=1))
-        measure.append(note.Note('C6', quarterLength=1))
-        return measure
+        return n2measure
 
     @staticmethod
     def create_n3_measure():
-        measure = stream.Measure()
-        measure.append(note.Note('F5', quarterLength=2))
-        measure.append(note.Note('C6', quarterLength=.5))
-        measure.append(note.Note('B-5', quarterLength=.5))
-        measure.append(note.Note('A5', quarterLength=.5))
-        measure.append(note.Note('G5', quarterLength=.5))
-        return measure
+        return n3measure
 
     @staticmethod
     def create_n4_measure():
-        measure = stream.Measure()
-        measure.append(note.Note('D6', quarterLength=2))
-        measure.append(note.Note('G5', quarterLength=.5))
-        measure.append(note.Note('A5', quarterLength=.5))
-        measure.append(note.Note('B-5', quarterLength=.5))
-        measure.append(note.Note('C6', quarterLength=.5))
-        return measure
+        return n4measure
 
     @staticmethod
     def create_n5_measure():
-        measure = stream.Measure()
-        measure.append(note.Note('C5', quarterLength=.5))
-        measure.append(note.Note('D5', quarterLength=.5))
-        measure.append(note.Note('E-5', quarterLength=.5))
-        measure.append(note.Note('F5', quarterLength=.5))
-        measure.append(note.Note('C6', quarterLength=2))
-        return measure
+        return n5measure
 
     @staticmethod
     def create_n6_measure():
-        measure = stream.Measure()
-        measure.append(note.Note('E-5', quarterLength=2))
-        measure.append(note.Note('A5', quarterLength=2))
-        return measure
+        return n6measure
 
     @staticmethod
     def create_n7_measure():
-        measure = stream.Measure()
-        measure.append(note.Note('G5', quarterLength=2))
-        measure.append(note.Note('C5', quarterLength=2))
-        return measure
+        return n7measure
 
     def fractal_step(self, old_array):
         master_array = []
