@@ -22,6 +22,80 @@ rules_before_final = {
     soc['n7']: (soc['n5'], soc['n1']),
 }
 
+## tuple structure (note,length,octave)
+## each rule is split into two arrays one for each chord
+rules_before_final_for_generation = {
+    soc['n1']: [
+        [
+            (soc['n5'],1), 
+            (soc['n4'],1)
+        ],
+        [
+            (soc['n3'],1), 
+            (soc['n2'],1)
+        ]
+    ],
+    soc['n2']: [
+        [
+            (soc['n5'],1), 
+            (soc['n6'],1)
+        ],
+        [
+            (soc['n7'],1), 
+            (soc['n1'],1)
+        ]
+    ],
+    soc['n3']: [
+        [
+            (soc['n4'],2)
+        ],
+        [
+            (soc['n1'],.5), 
+            (soc['n7'],.5), 
+            (soc['n6'],.5),
+            (soc['n5'],.5)
+        ]
+    ],
+    soc['n4']: [
+        [
+            (soc['n2'],2),
+        ],
+        [
+            (soc['n5'],.5), 
+            (soc['n6'],.5), 
+            (soc['n7'],.5), 
+            (soc['n1'],.5)
+        ]
+    ],
+    soc['n5']: [
+        [
+            (soc['n1'],.5), 
+            (soc['n2'],.5), 
+            (soc['n3'],.5), 
+            (soc['n4'],.5)
+        ],
+        [ 
+            (soc['n1'],2)
+        ]
+    ],
+    soc['n6']: [
+        [
+            (soc['n3'],2)
+        ],
+        [ 
+            (soc['n6'],2)
+        ]
+    ],
+    soc['n7']: [
+        [
+            (soc['n5'],2)
+        ],
+        [
+            (soc['n1'],2)
+        ]
+    ]
+}
+
 n1measure = stream.Measure()
 n1measure.append(note.Note('G5', quarterLength=1))
 n1measure.append(note.Note('F5', quarterLength=1))
