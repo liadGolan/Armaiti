@@ -149,6 +149,14 @@ class FractalPart:
                 master_array.append(e)
         return master_array
 
+    def get_final_version(self, old_array):
+        master_array = []
+        for n in old_array:
+            to_be_added = rules_before_final_for_generation[n]
+            for e in to_be_added:
+                master_array.append(e)
+        return master_array
+
     def get_final_build(self):
         for e in self.master_array:
             if e is 'C':
@@ -187,13 +195,12 @@ def main():
     second = Harmony('one', 4)
     part2 = second.get_final_build()
     part2.id = 'part2'
-    adjustedMelody = melody_adjustor(second,part1)
-    print(adjustedMelody);
-    # part1, part2 = part_corrector(part1, part2, first, second)
-    # score = stream.Score()
-    # score.insert(0, part1)
-    # score.insert(0, part2)
-    # score.show()
+    adjustedMelody = melody_adjustor(second.master_array,first.get_final_version(first.master_array))
+    part1, part2 = part_corrector(adjustedMelody, part2, first, second)
+    score = stream.Score()
+    score.insert(0, part1)
+    score.insert(0, part2)
+    score.show()
 
 
 if __name__ == '__main__':
