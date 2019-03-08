@@ -12,6 +12,16 @@ soc = {
     'n7' : 'B'
 }
 
+soc_in_key = {
+    'n1' : 'C',
+    'n2' : 'D',
+    'n3' : 'E-',
+    'n4' : 'F',
+    'n5' : 'G',
+    'n6' : 'A-',
+    'n7' : 'B-'
+}
+
 rules_before_final = {
     soc['n1']: (soc['n5'], soc['n4'], soc['n3'], soc['n2']),
     soc['n2']: (soc['n5'], soc['n6'], soc['n7'], soc['n1']),
@@ -20,6 +30,80 @@ rules_before_final = {
     soc['n5']: (soc['n1'], soc['n2'], soc['n3'], soc['n4'], soc['n1']),
     soc['n6']: (soc['n3'], soc['n6']),
     soc['n7']: (soc['n5'], soc['n1']),
+}
+
+## tuple structure (note,length,octave)
+## each rule is split into two arrays one for each chord
+rules_before_final_for_generation = {
+    soc['n1']: [
+        [
+            (soc['n5'],1,5), 
+            (soc['n4'],1,5)
+        ],
+        [
+            (soc['n3'],1,5), 
+            (soc['n2'],1,5)
+        ]
+    ],
+    soc['n2']: [
+        [
+            (soc['n5'],1,5), 
+            (soc['n6'],1,5)
+        ],
+        [
+            (soc['n7'],1,5), 
+            (soc['n1'],1,6)
+        ]
+    ],
+    soc['n3']: [
+        [
+            (soc['n4'],2,5)
+        ],
+        [
+            (soc['n1'],.5,6), 
+            (soc['n7'],.5,5), 
+            (soc['n6'],.5,5),
+            (soc['n5'],.5,5)
+        ]
+    ],
+    soc['n4']: [
+        [
+            (soc['n2'],2,6),
+        ],
+        [
+            (soc['n5'],.5,5), 
+            (soc['n6'],.5,5), 
+            (soc['n7'],.5,5), 
+            (soc['n1'],.5,6)
+        ]
+    ],
+    soc['n5']: [
+        [
+            (soc['n1'],.5,5), 
+            (soc['n2'],.5,5), 
+            (soc['n3'],.5,5), 
+            (soc['n4'],.5,5)
+        ],
+        [ 
+            (soc['n1'],2,6)
+        ]
+    ],
+    soc['n6']: [
+        [
+            (soc['n3'],2,5)
+        ],
+        [ 
+            (soc['n6'],2,5)
+        ]
+    ],
+    soc['n7']: [
+        [
+            (soc['n5'],2,5)
+        ],
+        [
+            (soc['n1'],2,5)
+        ]
+    ]
 }
 
 n1measure = stream.Measure()
