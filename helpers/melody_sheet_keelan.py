@@ -93,17 +93,17 @@ rules_before_final_for_generation = {
     ],
     soc['n6']: [
         [
-            (soc['n4'],1.5,5)
+            (soc['n4'],1.5,5),
             (soc['n3'],.5,5)
         ],
         [ 
-            (soc['n2'],1.5,6)
+            (soc['n2'],1.5,6),
             (soc['n1'],.5,6)
         ]
     ],
     soc['n7']: [
         [
-            (soc['n3'],1.5,5)
+            (soc['n3'],1.5,5),
             (soc['n7'],.5,5)
         ],
         [
@@ -156,5 +156,5 @@ n6measure.append(note.Note('C6', quarterLength=.5))
 
 n7measure = stream.Measure()
 n7measure.append(note.Note('E5', quarterLength=1.5))
-n7measure.append(note.Note('B-5', quarterLength=1.5))
+n7measure.append(note.Note('B-5', quarterLength=.5))
 n7measure.append(note.Note('D-6', quarterLength=2))
